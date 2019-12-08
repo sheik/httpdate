@@ -1,7 +1,7 @@
 
 VERSION=1.0.1
-EPOCH=$(date +%s)
-GITHASH=$(git rev-parse --short HEAD)
+EPOCH=$(shell date +%s)
+GITHASH=$(shell git rev-parse --short HEAD)
 GOOS=linux
 GOARCH=amd64
 

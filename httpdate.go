@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	host   = flag.String("host", "", "server to retreive date from")
+	host   = flag.String("host", "", "host to retreive date from; format: host[:port]")
 	proto  = flag.String("proto", "https", "protocol to use (http or https)")
 	quiet  = flag.Bool("q", false, "disable output to STDOUT and STDERR")
 	layout = "Mon, 02 Jan 2006 15:04:05 MST"
@@ -19,15 +19,10 @@ var (
 func main() {
 	flag.Parse()
 
-	if *host == "" {
-		fmt.Fprintf(os.Stderr, "-host must be specified\n")
-		os.Exit(1)
-	}
-
 	err := SetSystemTime(*host, *proto)
 	if err != nil {
 		if !*quiet {
-			fmt.Fprintf(os.Stderr, "%s\n", err)
+			fmt.Fprintf(os.Stderr, "error: %s\n", err)
 		}
 		os.Exit(1)
 	}
@@ -38,6 +33,11 @@ func main() {
 }
 
 func SetSystemTime(host, protocol string) error {
+	// check for host/ip
+	if host == "" {
+		return fmt.Errorf("host must be specified")
+	}
+
 	// check protocol
 	if protocol != "http" && protocol != "https" {
 		return fmt.Errorf("invalid protocol, must be http or https")
@@ -48,7 +48,7 @@ func SetSystemTime(host, protocol string) error {
 	resp, err := client.Head(fmt.Sprintf("%s://%s", protocol, host))
 
 	if err != nil {
-		return fmt.Errorf("could not execute HEAD request")
+		return err
 	}
 
 	// check for time in HTTP header
