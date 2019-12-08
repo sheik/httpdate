@@ -1,5 +1,5 @@
 
-VERSION=1.0.1
+VERSION=1.0.2
 EPOCH=$(shell date +%s)
 GITHASH=$(shell git rev-parse --short HEAD)
 GOOS=linux
