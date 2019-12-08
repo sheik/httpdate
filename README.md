@@ -31,3 +31,14 @@ The command *must be run as root* in order to properly update the system time.
 
 ## Build Requirements
 To build and package you need to have Golang and fpm installed. 
+
+To build, just run:
+
+    make
+
+The packages will be created and placed in the "Releases/" directory. Either install the .yum or .deb from the command line, or use the tar file like so:
+
+    tar -C / -xvf httpdate.tar
+
+Then you just run httpdate as root.
+
