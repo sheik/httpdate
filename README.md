@@ -1,4 +1,8 @@
 # httpdate
+## Get httpdate
+Get a .rpm, .deb, or .tar from the releases page.
+
+## Usage
 Set system time via HTTP headers. This allows you to keep the linux system date up-to-date using a standard port commonly not blocked by a firewall in data centers (port 80 or port 443). 
 
     Usage of httpdate:
