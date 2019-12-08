@@ -24,3 +24,6 @@ It can be added as a cronjob to keep system in-sync.
     0 0,12 * * * root /usr/bin/httpdate -host google.com -q
 
 The command *must be run as root* in order to properly update the system time.
+
+## Build Requirements
+To build and package you need to have Golang and fpm installed. 
